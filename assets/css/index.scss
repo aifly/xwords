@@ -1,0 +1,12 @@
+@import './base.scss';
+.lt-main-nav{
+	width: 10rem;
+	@include transition_transform(.5s);
+	
+	li{
+		
+		@include pos(r);
+		width:100%;
+		
+	}
+}

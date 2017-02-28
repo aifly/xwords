@@ -107,12 +107,9 @@ class IndexApp extends Component {
 				if(iNow>life){
 					iNow = 0;
 					life = this.r(20,30)|0;
-					
 				}
 				iNow++;
-			
-
-				this.starting && window.webkitRequestAnimationFrame(render);
+			this.props.currentPage === 0 && window.webkitRequestAnimationFrame(render);
 		}
 		window.webkitRequestAnimationFrame(render);
 	}
