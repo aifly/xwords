@@ -5,34 +5,370 @@ import './assets/css/index.css';
 
 import IndexApp from './index/index.jsx';
 import WordsListApp from './wordslist/index.jsx';
+import CoverApp from './cover/index.jsx';
+import ContentApp from './content/index.jsx';
+import ResultApp from './result/index.jsx';
+
+import $ from 'jquery';
+import './assets/js/touch.js';
 
 export class App extends Component {
 	constructor(props) {
-		super(props);	
+		super(props);
 		this.state = {
-			currentPage:1
+			currentPage:0
 		}
 		this.viewH = document.documentElement.clientHeight;
 	}
 	render() {
+		var data ={
+			currentPage:this.state.currentPage
+		}
+		var fupinProps = [
+			{
+				words:'扶真贫、真扶贫',
+				page:this.state.currentPage-1,
+				bg:'./assets/images/fupin2.jpg',
+				top:'10rem',
+				textStyle:{
 
+				}
+			},
+			{
+				words:'扶贫先扶智，绝不能让贫困家庭的孩子输在起跑线上',
+				page:this.state.currentPage-1,
+				bg:'./assets/images/fupin3.jpg',
+				top:'2rem',
+				textStyle:{
+					lineHeight:'.7rem',
+					textAlign:'left',
+					fontSize:'.5rem',
+					padding:10,
+					boxSizing:'border-box'
+				}
+			},
+			{
+				words:'坚决阻止贫困现象代际传递',
+				page:this.state.currentPage-1,
+				bg:'./assets/images/fupin4.jpg',
+				top:'2rem',
+				textStyle:{
+					fontSize:'.5rem',
+				}
+			},{
+				words:'坚持精准扶贫，不能“手榴弹炸跳蚤”',
+				page:this.state.currentPage-1,
+				bg:'./assets/images/fupin5.jpg',
+				textStyle:{
+					lineHeight:'.7rem',
+					textAlign:'left',
+					fontSize:'.5rem',
+					padding:10,
+					boxSizing:'border-box'
+				}
+			}
+		];
 		var components = [
-			<IndexApp currentPage={this.state.currentPage}></IndexApp>,
-			<WordsListApp></WordsListApp>
-			];
+			<IndexApp {...data}></IndexApp>,
+			<WordsListApp {...data}></WordsListApp>,
+			<CoverApp {...data}></CoverApp>,
+		];
+		fupinProps.forEach((item,i)=>{
+			components.push(<ContentApp {...data} {...item}></ContentApp>)
+		});
+		var gaigeCoverProps = {
+				bg:'./assets/images/gaige1.jpg',
+				textbg:'./assets/images/ggtext.png',
+				words:'改革',
+				times:100,
+				all:4
+		}
+		components.push(<CoverApp {...data} {...gaigeCoverProps}></CoverApp>);
+
+		var gaigeProps =[
+			{
+					words:'改革的集结号已经吹响',
+					page:2,
+					bg:'./assets/images/gaige2.jpg',
+					top:'2rem',
+					all:4,
+					textStyle:{
+						background:'rgba(233,75,75,.55)',
+						fontSize:'.5rem',
+						boxSizing:'border-box'
+				}
+			},
+			{
+					words:'我们要做改革的弄潮儿',
+					page:3,
+					bg:'./assets/images/gaige3.jpg',
+					top:'2rem',
+					all:4,
+					textStyle:{
+						background:'rgba(233,75,75,.55)',
+						fontSize:'.5rem',
+						boxSizing:'border-box'
+				}
+			},
+			{
+					words:'蹄疾步稳推进各项改革',
+					page:4,
+					bg:'./assets/images/gaige4.jpg',
+					top:'2rem',
+					all:4,
+					textStyle:{
+						background:'rgba(233,75,75,.55)',
+						fontSize:'.5rem',
+						boxSizing:'border-box'
+				}
+			}
+		]
+		gaigeProps.forEach((item,i)=>{
+			components.push(<ContentApp {...data} {...item}></ContentApp>)
+		});
+
+		var shengtaiCoverProps = {
+				bg:'./assets/images/shengtai1.jpg',
+				textbg:'./assets/images/sttext.png',
+				words:'生态',
+				times:39,
+				all:2
+		}
+		components.push(<CoverApp {...data} {...shengtaiCoverProps}></CoverApp>);
+		var shengtaiProps =[
+			{
+					words:'环境就是民生，青山就是美丽、蓝天也是幸福',
+					page:2,
+					bg:'./assets/images/shengtai2.jpg',
+					top:'auto',
+					all:2,
+					textStyle:{
+						background:'rgba(0,153,51,.55)',
+						fontSize:'.6rem',
+						lineHeight:'.7rem',
+						textAlign:'left',
+						boxSizing:'border-box',
+						padding:10
+				}
+			}
+		]
+		shengtaiProps.forEach((item,i)=>{
+			components.push(<ContentApp {...data} {...item}></ContentApp>)
+		});
+
+		var chuangxinCoverProps = {
+				bg:'./assets/images/chuangxin1.jpg',
+				textbg:'./assets/images/cxtext.png',
+				words:'创新',
+				times:117,
+				all:5
+		}
+		components.push(<CoverApp {...data} {...chuangxinCoverProps}></CoverApp>);
+
+		var chuangxinProps =[
+			{
+					words:'要择天下英才而用之',
+					page:2,
+					bg:'./assets/images/chuangxin2.jpg',
+					top:'2rem',
+					all:5,
+					textStyle:{
+						background:'rgba(42,255,255,.55)',
+						fontSize:'.6rem',
+						boxSizing:'border-box',
+				}
+			},{
+					words:'变“要我创新”为我要创新',
+					page:3,
+					bg:'./assets/images/chuangxin3.jpg',
+					top:'auto',
+					all:5,
+					textStyle:{
+						background:'rgba(42,255,255,.55)',
+						fontSize:'.6rem',
+						boxSizing:'border-box',
+				}
+			},{
+					words:'谋创新就是谋未来',
+					page:4,
+					bg:'./assets/images/chuangxin4.jpg',
+					top:'auto',
+					all:5,
+					textStyle:{
+						background:'rgba(42,255,255,.55)',
+						fontSize:'.6rem',
+						boxSizing:'border-box',
+				}
+			},,{
+					words:'创新是引领发展的第一动力',
+					page:5,
+					bg:'./assets/images/chuangxin5.jpg',
+					top:'2rem',
+					all:5,
+					textStyle:{
+						background:'rgba(42,255,255,.55)',
+						fontSize:'.6rem',
+						boxSizing:'border-box',
+				}
+			}
+		]
+		chuangxinProps.forEach((item,i)=>{
+			components.push(<ContentApp {...data} {...item}></ContentApp>)
+		});
+
+
+
+		var kaifangCoverProps = {
+				bg:'./assets/images/kaifang1.jpg',
+				textbg:'./assets/images/kftext.png',
+				words:'开放',
+				times:49,
+				all:5,
+				position:'bottom',
+				customerClass:'kaifang'
+		}
+		components.push(<CoverApp {...data} {...kaifangCoverProps}></CoverApp>);
+		var kaifangProps =[
+			{
+					words:'做好对外开放这篇大文章',
+					page:2,
+					bg:'./assets/images/kaifang2.jpg',
+					top:'2rem',
+					all:4,
+					textStyle:{
+						background:'rgba(101,68,161,.7)',
+						fontSize:'.6rem',
+						boxSizing:'border-box',
+				}
+			},{
+					words:'始终不渝的奉行互利共赢的开放战略',
+					page:3,
+					bg:'./assets/images/kaifang3.jpg',
+					top:'auto',
+					all:4,
+					textStyle:{
+						background:'rgba(101,68,161,.7)',
+						lineHeight:'.72rem',
+						padding:'10px 30px',
+						textAlign:'left',
+						boxSizing:'border-box',
+				}
+			},{
+					words:'开放也是改革，要寓改革于开放之中',
+					page:4,
+					bg:'./assets/images/kaifang4.jpg',
+					top:'auto',
+					all:4,
+					textStyle:{
+						background:'rgba(101,68,161,.7)',
+						lineHeight:'.72rem',
+						padding:'10px 30px',
+						textAlign:'left',
+						boxSizing:'border-box',
+				}
+			}
+		]
+		kaifangProps.forEach((item,i)=>{
+			components.push(<ContentApp {...data} {...item}></ContentApp>)
+		});
+
+
+		var fazhanCoverProps = {
+				bg:'./assets/images/fazhan1.jpg',
+				textbg:'./assets/images/fztext.png',
+				words:'发展',
+				times:238,
+				all:4,
+				position:'bottom',
+				customerClass:'fazhan'
+		}
+		components.push(<CoverApp {...data} {...fazhanCoverProps}></CoverApp>);
+		var fazhanProps =[
+			{
+					words:'坚持发展是硬道理的战略思想',
+					page:2,
+					bg:'./assets/images/fazhan2.jpg',
+					top:'auto',
+					all:4,
+					textStyle:{
+						background:'rgba(53,109,255,.55)',
+						fontSize:'.6rem',
+						lineHeight:'.72rem',
+						padding:'10px 30px',
+						textAlign:'left',
+						boxSizing:'border-box',
+				}
+			},	{
+					words:'众人拾柴火焰高',
+					page:3,
+					bg:'./assets/images/fazhan3.jpg',
+					top:'2rem',
+					all:4,
+					textStyle:{
+						background:'rgba(53,109,255,.55)',
+						fontSize:'.6rem',
+						lineHeight:'.72rem',
+						padding:'10px 30px',
+						textAlign:'left',
+						boxSizing:'border-box',
+				}
+			},	{
+					words:'主动适应经济发展新常态',
+					page:4,
+					bg:'./assets/images/fazhan4.jpg',
+					top:'auto',
+					all:4,
+					textStyle:{
+						background:'rgba(53,109,255,.55)',
+						fontSize:'.6rem',
+						boxSizing:'border-box',
+				}
+			}
+		]
+		fazhanProps.forEach((item,i)=>{
+			components.push(<ContentApp {...data} {...item}></ContentApp>)
+		});
+
+		var lastStyle = {
+			background:'url(./assets/images/end.jpg) no-repeat center top',
+			backgroundSize:'cover',
+			height:this.viewH
+		}
+		this.components = components;
 		return (
 			<div style={{height:this.viewH,overflow:'hidden'}}>
-				<ul  className='lt-main-nav' style={{height:this.viewH * components.length,WebkitTransform:'translate3d(0,-'+(this.state.currentPage*this.viewH)+'px,0)'}}>
+				<ul  ref='lt-main-nav' className='lt-main-nav' style={{height:this.viewH * components.length,WebkitTransform:'translate3d(0,-'+(this.state.currentPage*this.viewH)+'px,0)'}}>
 					{components.map((item,i)=>{
 						return <li style={{height:this.viewH}} key={i}>{item}</li>
-					})}					
+					})}
+					<li style={{height:this.viewH}}><ResultApp></ResultApp></li>
+					<li style={lastStyle}></li>
 				</ul>
-				
+
 			</div>
 		);
 	}
 	componentWillMount() {
 		document.querySelector('html').style.fontSize = document.documentElement.clientWidth/10+'px';
+	}
+	componentDidMount() {
+		var s = this;
+		
+		$(this.refs['lt-main-nav']).swipe('up',function(){
+				if(s.state.currentPage>=s.components.length-1){
+					s.state.currentPage=s.components.length-1
+				}else{
+					s.state.currentPage=s.state.currentPage+1;
+				}
+			 s.forceUpdate();
+		}).swipe('down',function(){
+			if(s.state.currentPage<=0){
+					s.state.currentPage=0
+				}else{
+					s.state.currentPage=s.state.currentPage-1;
+				}
+			 s.forceUpdate();
+		})
 	}
 }
 

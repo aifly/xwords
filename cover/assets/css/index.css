@@ -1,0 +1,86 @@
+/*.ant-btn:focus, .ant-btn:hover,.ant-input:focus, .ant-input:hover {
+    background-color: #fff;
+    border-color: #bf1616;
+    box-shadow: 0 0 0 2px rgba(191, 22, 22, 0.1);
+}*/
+.lt-full {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0; }
+
+.lt-fupin1-main-ui {
+  overflow: hidden; }
+  .lt-fupin1-main-ui img {
+    height: 100%;
+    width: auto; }
+  .lt-fupin1-main-ui .lt-fupin1-img-C {
+    width: 12rem;
+    height: 100%;
+    position: absolute;
+    left: -1rem;
+    top: 0; }
+  .lt-fupin1-main-ui .layer {
+    position: absolute; }
+  .lt-fupin1-main-ui .fazhan .lt-fp-text {
+    position: relative;
+    top: 6rem; }
+  .lt-fupin1-main-ui .fazhan .lt-fp-word div {
+    top: 7.6rem; }
+    .lt-fupin1-main-ui .fazhan .lt-fp-word div:nth-of-type(2) {
+      top: 8.5rem; }
+    .lt-fupin1-main-ui .fazhan .lt-fp-word div:nth-of-type(3) {
+      top: 9.5rem;
+      font-size: .5rem; }
+  .lt-fupin1-main-ui .kaifang .lt-fp-text {
+    position: relative;
+    top: 5rem; }
+  .lt-fupin1-main-ui .kaifang .lt-fp-word div {
+    top: 6.5rem; }
+    .lt-fupin1-main-ui .kaifang .lt-fp-word div:nth-of-type(2) {
+      top: 7.5rem; }
+    .lt-fupin1-main-ui .kaifang .lt-fp-word div:nth-of-type(3) {
+      top: 8.5rem;
+      font-size: .5rem; }
+
+.lt-fp-text {
+  position: absolute;
+  width: 3rem;
+  left: 3.5rem;
+  bottom: 5rem; }
+  .lt-fp-text:before {
+    content: '';
+    height: 1px;
+    width: 5rem;
+    left: -1rem;
+    bottom: -.3rem;
+    position: absolute;
+    background: -webkit-gradient(linear, left top, right top, from(rgba(204, 204, 204, 0.2)), color-stop(0.5, #cccccc), to(rgba(204, 204, 204, 0.2)));
+    background: -moz-linear-gradient(left, rgba(204, 204, 204, 0.2), #cccccc 50%, rgba(204, 204, 204, 0.2));
+    background: -ms-linear-gradient(left, rgba(204, 204, 204, 0.2), #cccccc 50%, rgba(204, 204, 204, 0.2)); }
+  .lt-fp-text img {
+    width: 100% !important;
+    height: auto !important; }
+
+.lt-fp-word {
+  font-size: .4rem;
+  color: #fff;
+  width: 10rem;
+  left: 0;
+  position: absolute; }
+  .lt-fp-word div {
+    width: 8rem;
+    position: absolute;
+    bottom: 4rem;
+    left: 1rem;
+    text-align: center; }
+    .lt-fp-word div span {
+      font-size: .6rem; }
+    .lt-fp-word div:nth-of-type(2) {
+      bottom: 3rem; }
+    .lt-fp-word div:nth-of-type(3) {
+      bottom: 2rem;
+      font-size: .5rem; }
+
+/*# sourceMappingURL=index.css.map */

@@ -12,6 +12,20 @@
 		<div id="fly-main">
 			
 		</div>
-		<script src='http://localhost:4600/index.js'></script>
+		<!-- 
+			<script src='http://localhost:4600/index.js'></script> 
+		-->
+		<script>
+				
+				function onError(){
+
+						var script = '<script src="./assets/js/index.js"><\/script> ';
+						var s = document.createElement('script');
+						s.src='./assets/js/index.js';
+						document.body.appendChild(s);;
+				}
+
+		</script>
+		<script src='http://localhost:4600/index.js' onError='onError()'></script> 
 </body>
 </html>

@@ -1,0 +1,105 @@
+﻿@import "../../../assets/css/base.scss";
+.lt-fupin1-main-ui{
+  overflow: hidden;
+  img{
+    height: 100%;
+    width:auto;
+  }
+  .lt-fupin1-img-C {
+    width:12rem;
+    height: 100%;
+    @include pos(a);
+    left: -1rem;
+    top:0;
+  }
+  .layer{
+    @include pos(a);
+  }
+
+  .fazhan{
+    .lt-fp-text{
+      @include pos(r);
+      top:6rem;
+    }
+    .lt-fp-word{
+      div{
+        top:7.6rem;
+        &:nth-of-type(2){
+          top:8.5rem;
+        }
+        &:nth-of-type(3){
+          top:9.5rem;
+          font-size: .5rem;
+        }
+      }
+    }
+  }
+  .kaifang{
+    .lt-fp-text{
+      @include pos(r);
+      top:5rem;
+      
+    }
+    .lt-fp-word{
+      div{
+        top:6.5rem;
+        &:nth-of-type(2){
+          top:7.5rem;
+        }
+        &:nth-of-type(3){
+          top:8.5rem;
+          font-size: .5rem;
+        }
+      }
+    }
+  }
+
+
+}
+
+.lt-fp-text{
+  @include pos(a);
+  width:3rem;
+  left: 3.5rem;
+  bottom: 5rem;
+
+  &:before{
+    content:'';
+    height: 1px;
+    width: 5rem;
+    left: -1rem;
+    bottom:-.3rem;
+    @include pos(a);
+    @include fly-h-gradient-line();
+  }
+  img{
+    width:100% !important;
+    height: auto !important;
+  }
+}
+.lt-fp-word{
+  font-size: .4rem;
+  color:#fff;
+  width:10rem;
+
+  
+  left: 0;
+  @include pos(a);
+  div{
+    width:8rem;
+    @include pos(a);
+    bottom: 4rem;
+    span{
+      font-size:.6rem;
+    }
+    left: 1rem;   
+    text-align: center;
+    &:nth-of-type(2){
+      bottom: 3rem;
+    }
+    &:nth-of-type(3){
+      bottom: 2rem;
+      font-size: .5rem;
+    }
+  }
+}

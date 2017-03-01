@@ -11,26 +11,32 @@ class WordsListApp extends Component {
 				{
 					img:'./assets/images/fupin.png',
 					times:19,
+					defaultTimes:19,
 					name:'扶贫'
 				},{
 					img:'./assets/images/shengtai.png',
 					times:39,
+					defaultTimes:39,
 					name:'生态'
 				},{
 					img:'./assets/images/kaifang.png',
 					times:49,
+					defaultTimes:49,
 					name:'开放'
 				},{
 					img:'./assets/images/gaige.png',
 					times:100,
+					defaultTimes:100,
 					name:'改革'
 				},{
 					img:'./assets/images/chuangxin.png',
 					times:117,
+					defaultTimes:117,
 					name:'创新'
 				},{
 					img:'./assets/images/fazhan.png',
 					times:238,
+					defaultTimes:238,
 					name:'发展'
 				}
 			]
@@ -56,9 +62,9 @@ class WordsListApp extends Component {
 							 	<img src={item.img}/>
 							 </div>
 							 <div>
-							 	总书记两会重要讲话中,<span style={{color:i%2===0?'#ffff00':'#99ccff'}}>{item.times}</span>次<br/>提到{item.name}
+							 总书记两会重要讲话中,<span style={{color:i%2===0?'#ffff00':'#99ccff'}}><label>{item.defaultTimes}</label><em>{item.times}</em></span>次<br/>提到{item.name}
 							 </div>
-							 <canvas width={this.viewW/10*7} height={this.viewW/10*2} ref={'canvas_'+i}></canvas>
+							 <canvas width={this.viewW/10*6} height={this.viewW/10*2} ref={'canvas_'+i}></canvas>
 						</li>
 					})}
 				</ul>
@@ -68,47 +74,78 @@ class WordsListApp extends Component {
 
 
 	componentDidMount() {
-		//this.startAnimate(this.refs['canvas_0']);
+		
+		this.startAnimate();
+		
 	}
 
-	startAnimate(canvas){
-		var context = canvas.getContext('2d');
-
-		var x = 3,
-			y = canvas.height/2;
-			var w = canvas.width,
-				h = canvas.height;
+	startAnimate(){
+		
+		this.starting = true;
+		var canvas = this.refs['canvas_0'];
+		this.state.list.forEach((item,i)=>{
+			item.times = item.times - 19;
+			item.x =3;
+			item.y = canvas.height/2;
+		});
+	
 		var render = ()=>{
-			x++;
-			y+=1.5;
-			context.clearRect(0,0,w,h);
 
-			context.beginPath();
-			context.fillStyle="#189cfb";
-			context.strokeStyle="#189cfb";
-			context.arc(3,canvas.height/2,3,0,Math.PI*2,false);
-			context.closePath();
-			context.fill();	
-			context.moveTo(3,canvas.height/2);
 
-			if(y>=h){
-				context.beginPath();
-				context.moveTo(20,h);
-				context.lineTo(x,h);
-				console.log(x,h)
-			}
-			else{
-				context.lineTo(x,y);	
-			}
-			
-			context.stroke();
+			this.state.list.forEach((item,i)=>{
+				var canvas = this.refs['canvas_'+i];
+				var context = canvas.getContext('2d');
+				
+					var x = item.x;
+					var y = item.y;
+					var w = canvas.width,
+					h = canvas.height;
+					var isClear=true;
+					var defaultTimes = item.defaultTimes;
+					
+					if(item.y>=h){
+						isClear =false;
+					}
+					isClear && context.clearRect(0,0,w,h);
 
-			webkitRequestAnimationFrame(render);
+					context.beginPath();
+					context.fillStyle="#189cfb";
+					context.strokeStyle="#189cfb";
+					context.arc(4,canvas.height/2,3,0,Math.PI*2,false);
+					context.closePath();
+					context.fill();	
+					item.times+=.5;
+					if(item.times<=defaultTimes && item.times%1 === 0){
+
+						this.state.list[i].times = item.times;
+
+						this.forceUpdate();				
+					}
+				
+					if(item.y>=h){
+						 item.y = h;
+						context.fillRect(h/4+2,h-1,item.x,1);
+						item.x+=3;
+
+					}else{
+						item.x+=1;
+						item.y+=2;
+						context.moveTo(3,canvas.height/2);
+						context.lineTo(item.x,item.y);
+					}
+					
+					context.stroke();
+
+			});
+
+		
+		this.starting &&	webkitRequestAnimationFrame(render);
 		}
 		webkitRequestAnimationFrame(render);
 
-		
-
+		setTimeout(()=>{
+				this.starting = false;
+		},10000)
 	}
 }
 export default PubCom(WordsListApp);
