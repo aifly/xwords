@@ -8,7 +8,8 @@ import WordsListApp from './wordslist/index.jsx';
 import CoverApp from './cover/index.jsx';
 import ContentApp from './content/index.jsx';
 import ResultApp from './result/index.jsx';
-
+import Obserable from './components/public/obserable.js';
+var obserable = new Obserable();
 import $ from 'jquery';
 import './assets/js/touch.js';
 
@@ -22,7 +23,8 @@ export class App extends Component {
 	}
 	render() {
 		var data ={
-			currentPage:this.state.currentPage
+			currentPage:this.state.currentPage,
+			obserable:obserable
 		}
 		var fupinProps = [
 			{
@@ -335,13 +337,17 @@ export class App extends Component {
 			height:this.viewH
 		}
 		this.components = components;
+		var infoStyle ={
+			background:'url(./assets/images/info.png) no-repeat center center',
+			backgroundSize:'contain'
+		}
 		return (
 			<div style={{height:this.viewH,overflow:'hidden'}}>
 				<ul  ref='lt-main-nav' className='lt-main-nav' style={{height:this.viewH * components.length,WebkitTransform:'translate3d(0,-'+(this.state.currentPage*this.viewH)+'px,0)'}}>
 					{components.map((item,i)=>{
-						return <li style={{height:this.viewH}} key={i}>{item}</li>
+						return <li style={{height:this.viewH}} key={i}>{item} <span style={infoStyle} className='lt-info'></span></li>
 					})}
-					<li style={{height:this.viewH}}><ResultApp></ResultApp></li>
+					<li style={{height:this.viewH}}><ResultApp></ResultApp><span className='lt-info' style={infoStyle}></span></li>
 					<li style={lastStyle}></li>
 				</ul>
 
@@ -355,12 +361,20 @@ export class App extends Component {
 		var s = this;
 		
 		$(this.refs['lt-main-nav']).swipe('up',function(){
-				if(s.state.currentPage>=s.components.length-1){
-					s.state.currentPage=s.components.length-1
+				if(s.state.currentPage>=s.components.length+1){
+					s.state.currentPage=s.components.length+1;
 				}else{
 					s.state.currentPage=s.state.currentPage+1;
+					s.forceUpdate();
 				}
-			 s.forceUpdate();
+				
+				if(s.state.currentPage === 1){
+					obserable.trigger({type:'startAnimate'});
+				}
+				else{
+					obserable.trigger({type:'endAnimate'});
+				}
+			 
 		}).swipe('down',function(){
 			if(s.state.currentPage<=0){
 					s.state.currentPage=0

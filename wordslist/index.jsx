@@ -62,7 +62,7 @@ class WordsListApp extends Component {
 							 	<img src={item.img}/>
 							 </div>
 							 <div>
-							 总书记两会重要讲话中,<span style={{color:i%2===0?'#ffff00':'#99ccff'}}><label>{item.defaultTimes}</label><em>{item.times}</em></span>次<br/>提到{item.name}
+							 总书记两会重要讲话中,<span style={{color:i%2===0?'#ffff00':'#99ccff'}}><label>{item.defaultTimes}</label><em>{item.times|0}</em></span>次<br/>提到{item.name}
 							 </div>
 							 <canvas width={this.viewW/10*6} height={this.viewW/10*2} ref={'canvas_'+i}></canvas>
 						</li>
@@ -75,19 +75,38 @@ class WordsListApp extends Component {
 
 	componentDidMount() {
 		
-		this.startAnimate();
+		var {obserable} = this.props;
+		this.starting = true;
+		this.start = true;
+		obserable.on('startAnimate',()=>{
+			if(this.start){
+				this.start = false;
+				this.startAnimate();
+			}
+		});
+
+		obserable.on('endAnimate',()=>{
+			this.starting = false;
+			clearTimeout(this.endtimer);
+			this.state.list.forEach((item,i)=>{
+				item.times = item.defaultTimes;
+			});
+			this.forceUpdate();
+		});
 		
 	}
 
+
 	startAnimate(){
 		
-		this.starting = true;
+		
 		var canvas = this.refs['canvas_0'];
 		this.state.list.forEach((item,i)=>{
 			item.times = item.times - 19;
 			item.x =3;
 			item.y = canvas.height/2;
 		});
+
 	
 		var render = ()=>{
 
@@ -117,7 +136,7 @@ class WordsListApp extends Component {
 					item.times+=.5;
 					if(item.times<=defaultTimes && item.times%1 === 0){
 
-						this.state.list[i].times = item.times;
+						//this.state.list[i].times = item.times;
 
 						this.forceUpdate();				
 					}
@@ -138,13 +157,12 @@ class WordsListApp extends Component {
 
 			});
 
-		
-		this.starting &&	webkitRequestAnimationFrame(render);
+			this.starting && webkitRequestAnimationFrame(render);
 		}
 		webkitRequestAnimationFrame(render);
 
-		setTimeout(()=>{
-				this.starting = false;
+		this.endtimer = setTimeout(()=>{
+			this.starting = false;
 		},10000)
 	}
 }
