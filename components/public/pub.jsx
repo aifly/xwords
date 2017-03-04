@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
  
-
+import $ from 'jquery';
 
 export let PubCom = ComponsedComponent => class extends Component {
 	constructor(props) {
@@ -11,9 +11,10 @@ export let PubCom = ComponsedComponent => class extends Component {
 
 	 
 	componentWillMount() {
-	
+				
 	}
 
+	
 	render() {
 
 
